@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
 const clientSchema = new mongoose.Schema({
-    projectName: {
-        type: String,
-        required: true,
-    },
-    contactName: {
+    clientName: {
         type: String,
         required: true,
     },

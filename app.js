@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const cors = require('cors');
 const { default: mongoose } = require('mongoose');
 const employeesRouter = require('./routes/Employees');
+const clientsRouter = require('./routes/Clients');
+const eventsRouter = require('./routes/Events');
+const projectsRouter = require('./routes/Projects')
 const errorHandler = require('./errorHandler');
 
 
@@ -24,6 +27,9 @@ mongoose.connect('mongodb://127.0.0.1:27017').then(
 )
 
 app.use('/employees', employeesRouter);
+app.use('/clients', clientsRouter);
+app.use('/events', eventsRouter);
+app.use('/projects', projectsRouter);
 
 app.use(errorHandler);
 
