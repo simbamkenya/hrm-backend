@@ -2,14 +2,16 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const { default: mongoose } = require('mongoose');
+require('express-async-errors')
 const employeesRouter = require('./routes/Employees');
 const clientsRouter = require('./routes/Clients');
 const eventsRouter = require('./routes/Events');
 const projectsRouter = require('./routes/Projects')
 const errorHandler = require('./errorHandler');
+const Joi = require('joi')
 
 
-require("express-async-errors");
+
 const app = express();
 
 

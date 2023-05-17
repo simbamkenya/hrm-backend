@@ -29,7 +29,6 @@ router.delete('/:id', async (req, res) => {
     if(!event) res.status(400).send('could not delete the given event');
 
     res.send(event);
-
 });
 
 
