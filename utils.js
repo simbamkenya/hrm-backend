@@ -33,7 +33,7 @@ const validateClient = (client) => {
 const validateProject = (project) => {
     const schema = Joi.object({
         projectName: Joi.string().required().min(2).max(30),
-        client: Joi.objectId().required(),
+        client: Joi.string().required(),
         hours: Joi.number().required().min(0).max(200),
         dateDue : Joi.string().required().min(2).max(30)
     })
