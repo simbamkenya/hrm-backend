@@ -40,6 +40,16 @@ const validateProject = (project) => {
 
     return schema.validate(project)
 }
+
+const validateUser = (user) => {
+    const schema = Joi.object({
+        name: Joi.string().min(2).max(15).required(),
+        email: Joi.string().required().email().min(3).max(30),
+        password: Joi.string().required().min(6)
+    })
+    return schema.validate(user)
+}
+exports.validateUser = validateUser;
 exports.validateEmployee = validateEmployee;
 exports.validateClient = validateClient;
 exports.validateEvent = validateEvent;
