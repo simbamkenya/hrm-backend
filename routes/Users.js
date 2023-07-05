@@ -4,6 +4,7 @@ const { validateUser, validateLogin } = require('../utils')
 const router = express.Router()
 const _ = require('lodash')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 //fetching user
 router.get('/:id', async (req, res) => {
@@ -13,8 +14,17 @@ router.get('/:id', async (req, res) => {
   res.send(user)
 })
 
+//fetching user
+router.get('/', async (req, res) => {
+  const user = await User.find()
+  if (!user) res.status(400).send('user with given id was not found')
+
+  res.send(user)
+})
+
 //registering new user
 router.post('/register', async (req, res) => {
+  console.log(req.body)
   const { error } = validateUser(req.body)
   if (error) return res.send(error.details[0].message)
 
@@ -41,11 +51,10 @@ router.post('/login', async (req, res) => {
   if (!user) return res.send('invalid email or password')
 
   const validPass = await bcrypt.compare(req.body.password, user.password)
-  if (!validPass) {
-    return res.send('login unsuccessful')
-  } else {
-    return res.send('logged in kweliii')
-  }
+  if (!validPass) return res.send('couldnt login')
+
+  const token = jwt.sign({ _id: user._id }, 'jwtPrivateKey')
+  return res.send(token)
 })
 
 //deleting a user
