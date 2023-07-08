@@ -54,6 +54,7 @@ router.post('/login', async (req, res) => {
   if (!validPass) return res.send('couldnt login')
 
   const token = jwt.sign({ _id: user._id }, 'jwtPrivateKey')
+  res.header('x-auth-header', token)
   return res.send(token)
 })
 
